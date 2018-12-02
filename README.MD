@@ -1,4 +1,8 @@
 
+## Break throughs before Gene Therapy
+- Stem cell therapy (1970s)
+- Immunotherapy (1970s)
+
 ## 9-Types of Molecular Scissor (probably more) 
 - Cas9 (RNA)
 - TALE (Protein) 
