@@ -27,5 +27,6 @@
 - Data
     - Query Search: http://www.patentsview.org/query/
     - API: http://www.patentsview.org/api/doc.html
+    - http://www.patentsview.org/querydev/query/data_dictionary.html
 
 
