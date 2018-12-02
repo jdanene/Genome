@@ -1,4 +1,8 @@
 
+**To do create create `apiQueryPatentView.py` to query data from [PatentView](http://www.patentsview.org/api/query-language.html#query_string_format)**
+- Template for API Query: https://www.dataquest.io/blog/python-api-tutorial/
+- Template for JSON: https://www.dataquest.io/blog/python-json-tutorial/
+
 ## Break throughs before Gene Therapy
 - Stem cell therapy (1970s)
 - Immunotherapy (1970s)
@@ -23,3 +27,5 @@
 - Data
     - Query Search: http://www.patentsview.org/query/
     - API: http://www.patentsview.org/api/doc.html
+
+
