@@ -35,6 +35,13 @@ Generalize to bag-of-bigrams model.
 
 `*An N-gram is an N-token sequence of words: a 2-gram (more commonly called a bigram) is a two-word sequence of words like “please turn”, “turn your”, or “your homework”, and a 3-gram (more commonly called a trigram) is a three-word sequence of words like “please turn your”, or “turn your homework”... n-gram*`
 
+**Notes**
+
+    - Take a document as the input.
+    - Read the document line by line
+    - Tokenize the line (put into a vector)
+    - Process woords. 
+
 ## Break throughs before Gene Therapy
 - Stem cell therapy (1970s)
 - Immunotherapy (1970s)
