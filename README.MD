@@ -1,5 +1,5 @@
 
-**To do **
+**To do**
 - [x] create`apiQueryPatentView.py` to query data from [PatentView](http://www.patentsview.org/api/query-language.html#query_string_format)
   - DoneTemplate for API Query: https://www.dataquest.io/blog/python-api-tutorial/
   - Template for JSON: https://www.dataquest.io/blog/python-json-tutorial/
