@@ -4,14 +4,17 @@
   - Template for API Query: https://www.dataquest.io/blog/python-api-tutorial/
   - Template for JSON: https://www.dataquest.io/blog/python-json-tutorial/
 - [ ] Do a comprehensive query on gene editing companies and create bag-of-words histogram
-  - Problem 1: [brf_sum_text](http://www.patentsview.org/download/) is way too large computer. Tried loading in chunks but the encoding is mysterious so all of it is gibberish. 
-    - [X] Reach out to contact@patentsview.org to find out encoding. *No REPOSNSE!*
-    - [ ] Open up cluster account at NU? 
-  - Problem 2: [claim](http://www.patentsview.org/download/) probably too large, can't be addressed until address problem 1. 
+  - [brf_sum_text](http://www.patentsview.org/download/)
+  - [claim](http://www.patentsview.org/download/) 
   - Only text data accessible as of now
-    - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
-    - `patent_abstract`: Abstract of the patent. (START HERE)
-    - `patent_title`: (Most likely useless)
+  - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
+  - `patent_abstract`: Abstract of the patent. (START HERE)
+  - `patent_title`: (Most likely useless)
+- [ ] Bag-of-Words and Regex
+  - Regex Resources
+    - [Regex Cheat Sheet](https://scotch.io/tutorials/an-introduction-to-regex-in-python)
+    - [Regex Cheat Sheet](https://stackabuse.com/introduction-to-regular-expressions-in-python/)
+  - [Bag of Words](http://www.insightsbot.com/blog/R8fu5/bag-of-words-algorithm-in-python-introduction)
         
 
 
@@ -41,5 +44,6 @@
     - API: http://www.patentsview.org/api/doc.html
     - http://www.patentsview.org/querydev/query/data_dictionary.html
     - https://www.upcounsel.com/patent-classification-search
+    - https://www.upcounsel.com/patent-search-firm
 
 
