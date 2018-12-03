@@ -15,7 +15,20 @@
     - [Regex Cheat Sheet](https://stackabuse.com/introduction-to-regular-expressions-in-python/)
   - [Bag of Words](http://www.insightsbot.com/blog/R8fu5/bag-of-words-algorithm-in-python-introduction)
         
+## Bag-of-Words
+**Get unique words occuring in all text in our corpus and design a vocabulary.**
 
+The vocabulary will be a vector<int> of size the length(of unique words in corpus). Each document will be described by a vector w/ entiries equal to the number of occurrence of words in vocabulary. 
+  
+**Problems**
+  
+    -[ ] The vector can be big and sparse so use scipy-sparse vector to represent (which one?)
+    -[ ] text cleaning techniques to reduce vocab
+        - Ignoring case
+        - Ignoring punctuation
+        - Ignoring frequent words that don’t contain much information, called stop words, like “a,” “of,” etc.
+        - Stemming: words to their stem (e.g. “play” from “playing”) using stemming algorithms
+        - Fixing misspelled words.
 
 ## Break throughs before Gene Therapy
 - Stem cell therapy (1970s)
