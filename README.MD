@@ -29,6 +29,11 @@ The vocabulary will be a vector<int> of size the length(of unique words in corpu
         - Ignoring frequent words that don’t contain much information, called stop words, like “a,” “of,” etc.
         - Stemming: words to their stem (e.g. “play” from “playing”) using stemming algorithms
         - Fixing misspelled words.
+**Enhancement**
+
+Generalize to bag-of-bigrams model.
+
+`*An N-gram is an N-token sequence of words: a 2-gram (more commonly called a bigram) is a two-word sequence of words like “please turn”, “turn your”, or “your homework”, and a 3-gram (more commonly called a trigram) is a three-word sequence of words like “please turn your”, or “turn your homework”... n-gram*`
 
 ## Break throughs before Gene Therapy
 - Stem cell therapy (1970s)
