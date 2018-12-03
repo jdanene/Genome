@@ -41,6 +41,7 @@ Generalize to bag-of-bigrams model.
     - Read the document line by line
     - Tokenize the line (put into a vector)
     - Process woords. 
+    - https://en.wikipedia.org/wiki/Tf%E2%80%93idf
 
 ## Break throughs before Gene Therapy
 - Stem cell therapy (1970s)
