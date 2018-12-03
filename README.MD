@@ -1,7 +1,7 @@
 
 **To do**
 - [x] create`apiQueryPatentView.py` to query data from [PatentView](http://www.patentsview.org/api/query-language.html#query_string_format)
-  - DoneTemplate for API Query: https://www.dataquest.io/blog/python-api-tutorial/
+  - Template for API Query: https://www.dataquest.io/blog/python-api-tutorial/
   - Template for JSON: https://www.dataquest.io/blog/python-json-tutorial/
 - [ ] Do a comprehensive query on gene editing companies and create bag-of-words histogram
   - Problem 1: [brf_sum_text](http://www.patentsview.org/download/) is way too large computer. Tried loading in chunks but the encoding is mysterious so all of it is gibberish. 
