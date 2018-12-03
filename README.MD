@@ -43,6 +43,7 @@ Generalize to bag-of-bigrams model.
     - Process woords. 
     - https://en.wikipedia.org/wiki/Tf%E2%80%93idf
     - https://s3.amazonaws.com/assets.datacamp.com/production/course_5064/slides/chapter2.pdf
+    - https://medium.com/@aakashtandel/the-basics-of-natural-language-programming-a-big-bag-of-words-2f2ac06638ea
 
 ## Break throughs before Gene Therapy
 - Stem cell therapy (1970s)
