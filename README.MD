@@ -3,7 +3,7 @@
 - [x] create`apiQueryPatentView.py` to query data from [PatentView](http://www.patentsview.org/api/query-language.html#query_string_format)
   - Template for API Query: https://www.dataquest.io/blog/python-api-tutorial/
   - Template for JSON: https://www.dataquest.io/blog/python-json-tutorial/
-- [ ] Do a comprehensive query on gene editing companies and create bag-of-words histogram
+- [ ] Do a comprehensive query on gene editing companies 
   - [brf_sum_text](http://www.patentsview.org/download/)
   - [claim](http://www.patentsview.org/download/) 
   - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
