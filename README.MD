@@ -6,7 +6,6 @@
 - [ ] Do a comprehensive query on gene editing companies and create bag-of-words histogram
   - [brf_sum_text](http://www.patentsview.org/download/)
   - [claim](http://www.patentsview.org/download/) 
-  - Only text data accessible as of now
   - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
   - `patent_abstract`: Abstract of the patent. (START HERE)
   - `patent_title`: (Most likely useless)
