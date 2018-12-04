@@ -11,7 +11,7 @@ class BagOfWords:
     """ 
     This is a class to get n-gram BagOfWords model. 
 
-    Definition:
+    Definitions:
         text-document: Is a string of sentences, phrases, words... basically this thing represent textual data. 
         
         corpus: A corpus is  a [list-of text-document]
