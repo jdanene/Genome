@@ -9,7 +9,7 @@
   - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
   - `patent_abstract`: Abstract of the patent. (START HERE)
   - `patent_title`: (Most likely useless)
-- [ ] Bag-of-Words and Regex
+- [x] Bag-of-Words and Regex
   - Regex Resources
     - [Regex Cheat Sheet](https://scotch.io/tutorials/an-introduction-to-regex-in-python)
     - [Regex Cheat Sheet](https://stackabuse.com/introduction-to-regular-expressions-in-python/)
