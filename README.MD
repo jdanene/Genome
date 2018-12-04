@@ -18,7 +18,7 @@
    - Optimal amount of clusters: http://www.sthda.com/english/wiki/print.php?id=239
 - [ ] Fuzzy match the parameter `assignee_organization` with a stock data set. Merge on fuzzymatch and date
   - Question? When are patents applications usually released? May need to add 1 day to patent data before match to reflect the information being observed by market
-  - [ ] Implement more general ML algos
+- [ ] Implement more general ML algos
 
         
 ## Bag-of-Words
