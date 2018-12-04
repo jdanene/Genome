@@ -3,17 +3,23 @@
 - [x] create`apiQueryPatentView.py` to query data from [PatentView](http://www.patentsview.org/api/query-language.html#query_string_format)
   - Template for API Query: https://www.dataquest.io/blog/python-api-tutorial/
   - Template for JSON: https://www.dataquest.io/blog/python-json-tutorial/
-- [ ] Do a comprehensive query on gene editing companies 
+- [x] Bag-of-Words and Regex
+  - Regex Resources
+    - [Regex Cheat Sheet](https://scotch.io/tutorials/an-introduction-to-regex-in-python)
+    - [Regex Cheat Sheet](https://stackabuse.com/introduction-to-regular-expressions-in-python/)
+  - [Bag of Words](http://www.insightsbot.com/blog/R8fu5/bag-of-words-algorithm-in-python-introduction)
+- [ ] Do a comprehensive query on gene editing companies & set up a function to run `BagofWords` on this query. 
   - [brf_sum_text](http://www.patentsview.org/download/)
   - [claim](http://www.patentsview.org/download/) 
   - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
   - `patent_abstract`: Abstract of the patent. (START HERE)
   - `patent_title`: (Most likely useless)
-- [ ] Bag-of-Words and Regex
-  - Regex Resources
-    - [Regex Cheat Sheet](https://scotch.io/tutorials/an-introduction-to-regex-in-python)
-    - [Regex Cheat Sheet](https://stackabuse.com/introduction-to-regular-expressions-in-python/)
-  - [Bag of Words](http://www.insightsbot.com/blog/R8fu5/bag-of-words-algorithm-in-python-introduction)
+- [ ] Clustering: Cluster the BagofWords vectors and other feasture vectors using some clustering algo. 
+   - Optimal amount of clusters: http://www.sthda.com/english/wiki/print.php?id=239
+- [ ] Fuzzy match the parameter `assignee_organization` with a stock data set. Merge on fuzzymatch and date
+  - Question? When are patents applications usually released? May need to add 1 day to patent data before match to reflect the information being observed by market
+- [ ] Implement more general ML algos
+
         
 ## Bag-of-Words
 **Get unique words occuring in all text in our corpus and design a vocabulary.**
