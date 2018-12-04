@@ -19,8 +19,9 @@ class BagOfWords:
         N-grams: is a contiguous sequence of n items from a given text-document
 
         BagOfWords model: an orderless document representation—only that counts (or encodes) the words that matter in a corpus
-
-        N-grams BagOfWords model: parse text-document's in the corpus into N-grams units and store unit frequency of each unit in a count matrix.
+        
+        N-grams BagOfWords model: parse corpus' text-documents into a set of unique N-grams units called the vocabulary of the corpus,
+                                  and then for each of the corpus' text-document record the frequency N-grams units in [text-document] and [vocabulary] into a matrix. 
 
         Tfidf: Is a method to assign weights to a n-gram unit, `t`, within a text-document, d, in our corpus. 
             - highest when `t` occurs many times within a small number of documents (thus lending high discriminating power to those documents);
