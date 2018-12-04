@@ -1,7 +1,49 @@
 
-**To do create create `apiQueryPatentView.py` to query data from [PatentView](http://www.patentsview.org/api/query-language.html#query_string_format)**
-- Template for API Query: https://www.dataquest.io/blog/python-api-tutorial/
-- Template for JSON: https://www.dataquest.io/blog/python-json-tutorial/
+**To do**
+- [x] create`apiQueryPatentView.py` to query data from [PatentView](http://www.patentsview.org/api/query-language.html#query_string_format)
+  - Template for API Query: https://www.dataquest.io/blog/python-api-tutorial/
+  - Template for JSON: https://www.dataquest.io/blog/python-json-tutorial/
+- [ ] Do a comprehensive query on gene editing companies 
+  - [brf_sum_text](http://www.patentsview.org/download/)
+  - [claim](http://www.patentsview.org/download/) 
+  - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
+  - `patent_abstract`: Abstract of the patent. (START HERE)
+  - `patent_title`: (Most likely useless)
+- [ ] Bag-of-Words and Regex
+  - Regex Resources
+    - [Regex Cheat Sheet](https://scotch.io/tutorials/an-introduction-to-regex-in-python)
+    - [Regex Cheat Sheet](https://stackabuse.com/introduction-to-regular-expressions-in-python/)
+  - [Bag of Words](http://www.insightsbot.com/blog/R8fu5/bag-of-words-algorithm-in-python-introduction)
+        
+## Bag-of-Words
+**Get unique words occuring in all text in our corpus and design a vocabulary.**
+
+The vocabulary will be a vector<int> of size the length(of unique words in corpus). Each document will be described by a vector w/ entiries equal to the number of occurrence of words in vocabulary. 
+  
+**Problems**
+  
+    -[ ] The vector can be big and sparse so use scipy-sparse vector to represent (which one?)
+    -[ ] text cleaning techniques to reduce vocab
+        - Ignoring case
+        - Ignoring punctuation
+        - Ignoring frequent words that don’t contain much information, called stop words, like “a,” “of,” etc.
+        - Stemming: words to their stem (e.g. “play” from “playing”) using stemming algorithms
+        - Fixing misspelled words.
+**Enhancement**
+
+Generalize to bag-of-bigrams model.
+
+`*An N-gram is an N-token sequence of words: a 2-gram (more commonly called a bigram) is a two-word sequence of words like “please turn”, “turn your”, or “your homework”, and a 3-gram (more commonly called a trigram) is a three-word sequence of words like “please turn your”, or “turn your homework”... n-gram*`
+
+**Notes**
+
+    - Take a document as the input.
+    - Read the document line by line
+    - Tokenize the line (put into a vector)
+    - Process woords. 
+    - https://en.wikipedia.org/wiki/Tf%E2%80%93idf
+    - https://s3.amazonaws.com/assets.datacamp.com/production/course_5064/slides/chapter2.pdf
+    - https://medium.com/@aakashtandel/the-basics-of-natural-language-programming-a-big-bag-of-words-2f2ac06638ea
 
 ## Break throughs before Gene Therapy
 - Stem cell therapy (1970s)
@@ -29,5 +71,6 @@
     - API: http://www.patentsview.org/api/doc.html
     - http://www.patentsview.org/querydev/query/data_dictionary.html
     - https://www.upcounsel.com/patent-classification-search
+    - https://www.upcounsel.com/patent-search-firm
 
 
