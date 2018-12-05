@@ -8,7 +8,7 @@
     - [Regex Cheat Sheet](https://scotch.io/tutorials/an-introduction-to-regex-in-python)
     - [Regex Cheat Sheet](https://stackabuse.com/introduction-to-regular-expressions-in-python/)
   - [Bag of Words](http://www.insightsbot.com/blog/R8fu5/bag-of-words-algorithm-in-python-introduction)
-- [ ] Do a comprehensive query on gene editing companies & set up a function to run `BagofWords` on this query. 
+- [x] Do a comprehensive query on gene editing companies & set up a function to run `BagofWords` on this query. 
   - [brf_sum_text](http://www.patentsview.org/download/)
   - [claim](http://www.patentsview.org/download/) 
   - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
