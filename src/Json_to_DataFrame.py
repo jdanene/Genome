@@ -3,17 +3,23 @@ import json
 
 
 class Json_to_DataFrame:
+    '''input is a legit response only'''
     def __init__(self,response):
         self.json_data = json.loads(response.content)
         self.data = self.json_data['patents']
         self.raw_groups = ["cited_patents","inventors","application_citations",
-            "applications", "assignees","citedby_patents","coinventors",
-            "cpc_subgroups", "cpc_subsections", "cpcs", "IPCs", 
-            "locations", "nber_subcategories","nbers","patents",
-            "uspc_mainclasses", "uspc_subclasses","uspcs","years", 
-            "rawinventors","wipos","gov_interests","examiners"]
+                "applications", "assignees","citedby_patents","coinventors",
+                "cpc_subgroups", "cpc_subsections", "cpcs", "IPCs", 
+                "locations", "nber_subcategories","nbers","patents",
+                "uspc_mainclasses", "uspc_subclasses","uspcs","years", 
+                "rawinventors","wipos","gov_interests","examiners","cited_patents"]
         self.groups = [g for g in self.raw_groups if g in self.data[0].keys()]
-        self.data_dict = self.get_data(dict(), self.data)
+        self.df = pd.DataFrame()
+    def get_df(self):
+        if not self.groups:
+            self.data_dict = self.raw_groups
+        else:
+            self.data_dict = self.get_data(dict(), self.data)
         self.df = pd.DataFrame(self.data_dict)
 
     def add_to_dict(self,orginal_dict,key,val):
@@ -49,20 +55,25 @@ class Json_to_DataFrame:
         return dict(return_vals)
 
     def get_columns(self,entry,data_dict):
-        for g in self.groups:
-            if g in entry.keys():
-                field_data = entry[g] 
+        
+        for g in entry.keys():
+            field_data = entry[g] 
+            if g in self.groups:
                 if len(field_data)>1:
                     data_dict = self.single_fields(data_dict,self.unravel_fields(field_data))
                 else:
                     data_dict = self.single_fields(data_dict,field_data[0])
+            else:
+                data_dict = self.add_to_dict(data_dict,g,field_data)
         return data_dict
 
     def same_size_adjustment(self, data_dict, i):
         entries = i+1
         for key, val in data_dict.items():
             if len(val)< entries:
-                val = val + [None]
+                n=len(val)
+                diff = entries-n
+                val = [None]*diff + val
                 data_dict[key]=val
         return data_dict
 
@@ -75,4 +86,7 @@ class Json_to_DataFrame:
                 data_dict= self.same_size_adjustment(data_dict,i)
             i+=1
         return data_dict
+
+    def add_to_df(newdf):
+        self.df = pd.concat([self.df, newdf], ignore_index=True)
 

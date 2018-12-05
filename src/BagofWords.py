@@ -7,6 +7,10 @@ from sklearn.preprocessing import normalize
 from sklearn.feature_extraction.text import TfidfTransformer
 from scipy.sparse import csr_matrix
 from scipy.sparse import vstack
+from nltk import pos_tag
+from string import digits
+
+
 class BagOfWords:
     """ 
     This is a class to get n-gram BagOfWords model. 
@@ -41,6 +45,10 @@ class BagOfWords:
         stop_words ({set-of string}): Words used frequently in a sentence that we want to ignore. Used in preprocessing
         
         vocab ({list-of string}): All the unique N-grams units that appear in a corpus of textual documents
+        
+        pos_method (bool): Whether to do part of speech (POS) contextual tagging instead of N-Gram stemming. True -> POS is implemented. 
+        
+        numbers (bool) : Indicator if include numbers in parsed text or not
 
         X (scipy sparse csr_matrix<np.int>): Matrix of counts of number of occurrences of words in vocab for the corpus. Rows represent a specfic
         textual document w/in the corpus. 
@@ -49,14 +57,17 @@ class BagOfWords:
         X_idf (scipy sparse csr_matrix<np.float>): Matrix that holds Tfidf weights 
         X_idf_subl (scipy sparse csr_matrix<np.float>): Matrix that holds variation of Tdidf weights (see https://nlp.stanford.edu/IR-book/html/htmledition/sublinear-tf-scaling-1.html)
     """
-    def __init__(self, n =1):
+    def __init__(self, n =1, pos_method = False, numbers = False):
         #The stemmer. There are multiple put the porter stemmer seems to be the best. 
         self.reduce_inflec = PorterStemmer()
         
         #N-gram, the n-word sequence of words to process and also form our vocabulary. 
         self.n = n
         #Reduces the puncuation of a word. 
-        self.translator = str.maketrans('', '', string.punctuation)
+        if numbers==True:
+            self.translator = str.maketrans('', '', string.punctuation+digits)
+        else:
+            self.translator = str.maketrans('', '', string.punctuation)
 
         #Ignore words that are used frequently in sentences and have little meaning. 
         self.stop_words= set(stopwords.words('english'))
@@ -64,12 +75,19 @@ class BagOfWords:
         #Vocabulary of corpus
         self.vocab = set("")
 
+        #Part of speech context tagger?
+        self.pos_method = pos_method
+
         # Various matrices that encode relevant information of corpus
         self.X= csr_matrix((0, 0), dtype=int)
         self.X_norm_l1 = csr_matrix((0, 0), dtype=float)
         self.X_norm_l2 = csr_matrix((0, 0), dtype=float)
         self.X_idf = csr_matrix((0, 0), dtype=float)
         self.X_idf_subl = csr_matrix((0, 0), dtype=float)
+
+        #Boolean to tell if remove digits or not
+        self.numbers = numbers
+
 
     def extract_ngrams(self, doc_string):
         """ 
@@ -90,15 +108,22 @@ class BagOfWords:
 
         #Removes puncuation from word 
         words = doc_string.translate(self.translator)
+
         #Tokenize words into a vector
         words = words.split()
+        clean_and_purify = lambda w: ''.join([i for i in self.reduce_inflec.stem(w.lower()) if i.isalpha()])
+        
         #Removes `ignore_words` from vector,reduces the case to lower, and stems words
-        tokens = [self.reduce_inflec.stem(w.lower()) for w in words if w not in self.stop_words]
+        tokens = [clean_and_purify(w) for w in words if w not in self.stop_words]
+        tokens = ' '.join(tokens).split()
 
-        # Concatentate the tokens into ngrams and return
-        _ngrams = ngrams(tokens, self.n)
-        return [" ".join(ng) for ng in _ngrams]
+        if self.pos_method == False:
+            # Concatentate the tokens into ngrams and return
+            _ngrams = ngrams(x, 1)
+            return [" ".join(ng) for ng in _ngrams]
 
+        else:
+            return pos_tag(tokens)
 
     def get_vocabulary(self, corpus):
         '''
@@ -170,7 +195,6 @@ class BagOfWords:
             self.vocab = self.get_vocabulary(corpus)
 
         vectorizer = CountVectorizer(vocabulary = self.vocab, 
-                                    ngram_range=(self.n, self.n), 
                                     analyzer = self.extract_ngrams)
         self.X = vectorizer.fit_transform(corpus)
         pass
