@@ -53,7 +53,8 @@ Generalize to bag-of-bigrams model.
     - https://en.wikipedia.org/wiki/Tf%E2%80%93idf
     - https://s3.amazonaws.com/assets.datacamp.com/production/course_5064/slides/chapter2.pdf
     - https://medium.com/@aakashtandel/the-basics-of-natural-language-programming-a-big-bag-of-words-2f2ac06638ea
-
+** Patent Background **
+- http://www.bpmlegal.com/howtopat5.html
 ## Break throughs before Gene Therapy
 - Stem cell therapy (1970s)
 - Immunotherapy (1970s)
