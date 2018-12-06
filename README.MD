@@ -8,7 +8,7 @@
     - [Regex Cheat Sheet](https://scotch.io/tutorials/an-introduction-to-regex-in-python)
     - [Regex Cheat Sheet](https://stackabuse.com/introduction-to-regular-expressions-in-python/)
   - [Bag of Words](http://www.insightsbot.com/blog/R8fu5/bag-of-words-algorithm-in-python-introduction)
-- [ ] Do a comprehensive query on gene editing companies & set up a function to run `BagofWords` on this query. 
+- [x] Do a comprehensive query on gene editing companies & set up a function to run `BagofWords` on this query. 
   - [brf_sum_text](http://www.patentsview.org/download/)
   - [claim](http://www.patentsview.org/download/) 
   - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
@@ -16,8 +16,11 @@
   - `patent_title`: (Most likely useless)
 - [ ] Clustering: Cluster the BagofWords vectors and other feasture vectors using some clustering algo. 
    - Optimal amount of clusters: http://www.sthda.com/english/wiki/print.php?id=239
+   - http://brandonrose.org/clustering
+   - https://pythonprogramminglanguage.com/kmeans-elbow-method/
 - [ ] Fuzzy match the parameter `assignee_organization` with a stock data set. Merge on fuzzymatch and date
   - Question? When are patents applications usually released? May need to add 1 day to patent data before match to reflect the information being observed by market
+  - Or just use crosswalk on CUSIP's from NBER
 - [ ] Implement more general ML algos
 
         
@@ -50,7 +53,8 @@ Generalize to bag-of-bigrams model.
     - https://en.wikipedia.org/wiki/Tf%E2%80%93idf
     - https://s3.amazonaws.com/assets.datacamp.com/production/course_5064/slides/chapter2.pdf
     - https://medium.com/@aakashtandel/the-basics-of-natural-language-programming-a-big-bag-of-words-2f2ac06638ea
-
+** Patent Background **
+- http://www.bpmlegal.com/howtopat5.html
 ## Break throughs before Gene Therapy
 - Stem cell therapy (1970s)
 - Immunotherapy (1970s)
