@@ -18,6 +18,7 @@
    - Optimal amount of clusters: http://www.sthda.com/english/wiki/print.php?id=239
    - http://brandonrose.org/clustering
    - https://pythonprogramminglanguage.com/kmeans-elbow-method/
+   - Use PCA and K-Means for now but later look into more [complex matrix factorization techniques](https://scikit-learn.org/stable/auto_examples/applications/plot_topics_extraction_with_nmf_lda.html) 
 - [ ] Fuzzy match the parameter `assignee_organization` with a stock data set. Merge on fuzzymatch and date
   - Question? When are patents applications usually released? May need to add 1 day to patent data before match to reflect the information being observed by market
   - [How to map cusip to ticker](https://formthirteen.com/blog/how-to-map-cusip-to-ticker). 
