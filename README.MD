@@ -20,7 +20,8 @@
    - https://pythonprogramminglanguage.com/kmeans-elbow-method/
 - [ ] Fuzzy match the parameter `assignee_organization` with a stock data set. Merge on fuzzymatch and date
   - Question? When are patents applications usually released? May need to add 1 day to patent data before match to reflect the information being observed by market
-  - Or just use crosswalk on CUSIP's from NBER
+  - [How to map cusip to ticker](https://formthirteen.com/blog/how-to-map-cusip-to-ticker). 
+  - Or just use crosswalk on CUSIP's from [NBER Cusip to PatentView Map](http://www.nber.org/patents/match.txt)
 - [ ] Implement more general ML algos
 
         
