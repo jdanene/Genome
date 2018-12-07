@@ -119,7 +119,7 @@ class BagOfWords:
 
         if self.pos_method == False:
             # Concatentate the tokens into ngrams and return
-            _ngrams = ngrams(x, 1)
+            _ngrams = ngrams(tokens, self.n)
             return [" ".join(ng) for ng in _ngrams]
 
         else:

@@ -1,0 +1,28 @@
+https://clinicaltrials.gov/ct2/show/record/NCT03541603?term=Hemodynamic+Evaluation+of+Levosimendan+in+Patients+with+PH-HFpEF&rank=1
+
+
+// Data Definitions 
+
+- studies: https://prsinfo.clinicaltrials.gov/definitions.html
+- results: https://prsinfo.clinicaltrials.gov/results_definitions.html
+
+// Reference page
+- https://aact.ctti-clinicaltrials.org/points_to_consider
+
+// Noted
+
+-  Monthly copies of the AACT database are bundled with the data element definitions, AACT schema, and AACT data dictionary that were current at the time the copy was created.
+
+-Certain data elements need to be interpreted together with other data elements. For example, data elements such as enrollment date and completion date have a companion data element that indicates whether the value in the first field is an anticipated or actual value.
+
+-study record may be updated by the owner of the record at any time. Fields such as enrollment type may be changed from anticipated to actual, indicating that the value entered now reflects the actual rather than the planned enrollment. When data are downloaded, the result is a static copy of the database at that particular time point, and the history of changes made to the field is lost.
+
+-studies after FDAA meet more requirements than those before. 
+
+
+-registered post-FDAAA (September 2007), or studies with a primary completion date after December 2007. 
+-also consider annotating data elements used in analysis according to whether or not they are FDAAA-required fields
+
+-During our own analysis of the ClinicalTrials.gov database, several extreme values for numeric data elements were encountered, such as an anticipated enrollment of several million subjects. Before proceeding with aggregate analysis, users are encouraged to review data distributions in order to select appropriate analysis methods, and to run their own consistency checks (e.g., to compare whether the number of arm descriptions provided for the study matches the data element that quantifies the number of arms in the study design) as needed.
+
+-https://aact.ctti-clinicaltrials.org/points_to_consider

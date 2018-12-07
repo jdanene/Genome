@@ -1,7 +1,5 @@
 import os, sys, csv, zipfile
-from api_wrapper import PatentView, ListToQuery
-from Json_to_DataFrame import Json_to_DataFrame
-from BagofWords import BagOfWords
+from api_wrapper import PatentView, ListToQuery, Json_to_DataFrame
 from datetime import datetime, timedelta
 import pandas as pd
 #Fields that I'm currently interested in
@@ -68,7 +66,7 @@ def cpcDateRange(qValues, startdate = '2015-01-01', enddate = '2018-10-31'):
 
     #Remove E = Fixed Constructing, F = Mechanical Engineering; Lighting; Heating; Weapons; Blasting Engines; Pumps, 
     #H = Electricity,D = Textiles; paper
-    nber_filer = {} 
+    cpc_filer = {} 
     examiner_filer = '{"_or": [{"_lt": {"examiner_group": "1799"}},{"_gt": {"examiner_group": "3715"}}]}'
     cpc_filter = '{"_or": [{"cpc_section_id":"G"},{"cpc_section_id":"A"},{"cpc_section_id":"C"}]},{"_neq": {"assignee_organization":"None"}}'
     fullq = '{"_and": ['+q+',{"_gte":{"app_date":"'+startdate+'"}},{"_lt":{"app_date":"'+enddate+'"}},'+examiner_filer+']}'
@@ -120,96 +118,104 @@ def get_BigData(pdData,BIGFILE, chunkSize=1000):
     sys.stdout.flush()
     return result_df
 
-if __name__ == "__main__":
-    #ToDo: There a 200K words in the bag wtf! Need to only select on nber category also probably
-    # should generalize `cpcDateRange()` to take queries so don't have to hard code it in. 
+class ExtractData:
+    '''
+    Methods:
+    get_data(void): Just run this after you define your Attributes to get the data
 
-    #convert string date to another representation
-    convert_date = lambda d: datetime.strptime(d, '%Y-%m-%d').strftime('%Y%m%d')
+    Attributes: 
+    BASE_PATH (str) :Base path to get data, #FixMe: Absolute path
 
-    #Base path to get data, #FixMe: Absolute path
-    BASE_PATH = "/Users/dominicanene/Box/project/"
+    STARTDATE(str['%Y-%m-%d']) :Start of Interval
 
-    #Start of Interval
-    STARTDATE = '2007-01-01'
+    ENDDATE(str['%Y-%m-%d']) :End of Interval
 
-    #End of Interval
-    ENDDATE = '2018-10-31'
+    APINOTE(str) :Note to put on the end of this round of API data
 
-    #Note to put on the end of this round of API data
-    APINOTE  = "count"
-
-    #Note for claim data. 
-    CLAIM_Note = "claim"
-
-    #Output file names
-    OUTPUT_FILEBASE = convert_date(STARTDATE)+"_"+convert_date(ENDDATE)+".pkl"
-
-    # API data file name
-    API_DATA_NAME=os.path.join(BASE_PATH ,'data',APINOTE+OUTPUT_FILEBASE)
-
-    # Count output file name
-    CLAIM_OUTFILE_NAME=os.path.join(BASE_PATH ,'data',CLAIM_Note+OUTPUT_FILEBASE)
+    CLAIM_Note(str) :Note to put for outputted claim data. 
 
 
-    # The huge ass data files from PatentView to get text data from
-    CLAIM_FILE = os.path.join(BASE_PATH ,'data','claim.tsv.zip')
-    SUMMARY_FILE = os.path.join(BASE_PATH ,'data','brf_sum_text.zip')
+    CLAIMS_DF (pd.DataFrame): Claims textual data
+    pdData (pd.DataFrame) : Data of additional features. 
+    '''
+    def __init__(self):
+        #ToDo: There a 200K words in the bag wtf! Need to only select on nber category also probably
+        # should generalize `cpcDateRange()` to take queries so don't have to hard code it in. 
 
-    #If condition to check if file is alive, don't want to pull from the api too much!
-    if not os.path.isfile(API_DATA_NAME):
-        #Load CPC text file data
-        qValues0,qValues1,qValues2,qValues3,qValues4 = load_cpc(BASE_PATH)
+        #convert string date to another representation
+        convert_date = lambda d: datetime.strptime(d, '%Y-%m-%d').strftime('%Y%m%d')
 
-        #cpc codes -> query
-        date_pars = cpcDateRange(qValues1, startdate = STARTDATE, enddate = ENDDATE)
+        #Base path to get data, #FixMe: Absolute path
+        self.BASE_PATH = "/Users/dominicanene/Box/project/"
 
-        #query -> json.response
-        api_data = PatentView(parameters = date_pars, 
-                         fields = ["patent_id", "assignee_organization", "app_date","patent_date","patent_title","patent_abstract","patent_kind","examiner_group","cpc_subgroup_id","cpc_subgroup_title","nber_category_id","nber_category_title"], 
-                         num_results = 10000)
-        api_data.get_patents() #Ask PatentView for the data
-        response = api_data.request #Put it into a pointer
+        #Start of Interval
+        self.STARTDATE = '2007-01-01'
 
-        #json.response -> pd.DataFrame
-        data = Json_to_DataFrame(response)
-        data.get_df()
-        pdData = data.df
+        #End of Interval
+        self.ENDDATE = '2018-10-31'
 
-        #CROSS-TAB on NBER Technology Categories
-        pd.crosstab(pdData["nber_category_id"],pdData["nber_category_title"])
+        #Note to put on the end of this round of API data
+        self.APINOTE  = "count"
 
-        #save data
-        pdData.to_pickle(API_DATA_NAME)
-    else:
-        pdData = pd.read_pickle(API_DATA_NAME)
+        #Note for claim data. 
+        self.CLAIM_Note = "claim"
 
+        #Output file names
+        OUTPUT_FILEBASE = convert_date(self.STARTDATE)+"_"+convert_date(self.ENDDATE)+".pkl"
 
-    #Merge claims huge data set w/ the patent_id's from API
-    if not os.path.isfile(CLAIM_OUTFILE_NAME):
-        claims_df = get_BigData(pdData,CLAIM_FILE)
-        claims_df=claims_df.sort_values(by=["patent_id"])
-        claims_df.to_pickle(CLAIM_OUTFILE_NAME)
-    else:
-        claims_df = pd.read_pickle(CLAIM_OUTFILE_NAME)
+        # API data file name
+        self.API_DATA_NAME=os.path.join(self.BASE_PATH ,'data',self.APINOTE+OUTPUT_FILEBASE)
 
-    #Get Bag-of-Words for Claims
-    claims_corpus = list(claims_df["text"].astype(str))
-    claims_bow = BagOfWords(pos_method = True, numbers = False)
-    claims_bow.get_bagofwords(claims_corpus)
-
-    claims_bow = BagOfWords(n = 3, numbers = False)
-    claims_bow.get_bagofwords(claims_corpus)
+        # Count output file name
+        self.CLAIM_OUTFILE_NAME=os.path.join(self.BASE_PATH ,'data',self.CLAIM_Note+OUTPUT_FILEBASE)
 
 
-    #claims_bow.vocab
+        # The huge ass data files from PatentView to get text data from
+        self.CLAIM_FILE = os.path.join(self.BASE_PATH ,'data','claim.tsv.zip')
+        self.SUMMARY_FILE = os.path.join(self.BASE_PATH ,'data','brf_sum_text.zip')
 
-    #Merge claims huge data set w/ the patent_id's from API
-    #summary_df = get_BigData(pdData,SUMMARY_FILE)
-    #summary_df=summary_df.sort_values(by=["patent_id"])
-    #summary_corpus = list(summary_df["text"])
+    def get_data(self):
+        #If condition to check if file is alive, don't want to pull from the api too much!
+        if not os.path.isfile(self.API_DATA_NAME):
+            #Load CPC text file data
+            qValues0,qValues1,qValues2,qValues3,qValues4 = load_cpc(self.BASE_PATH)
 
-    #Get Bag-of-Words for Claims
-    #summary_bow = BagOfWords(n=4)
-    #summary_bow.get_bagofwords(summary_corpus)
+            #cpc codes -> query
+            date_pars = cpcDateRange(qValues1, startdate = self.STARTDATE, enddate = self.ENDDATE)
+
+            #query -> json.response
+            api_data = PatentView(parameters = date_pars, 
+                             fields = ["patent_id", "assignee_organization", "app_date","patent_date","patent_title","patent_abstract","patent_kind","examiner_group","cpc_subgroup_id","cpc_subgroup_title","nber_category_id","nber_category_title"], 
+                             num_results = 10000)
+            api_data.get_patents() #Ask PatentView for the data
+            response = api_data.request #Put it into a pointer
+
+            #json.response -> pd.DataFrame
+            data = Json_to_DataFrame(response)
+            data.get_df()
+            pdData = data.df
+
+            #CROSS-TAB on NBER Technology Categories
+            pd.crosstab(pdData["nber_category_id"],pdData["nber_category_title"])
+
+            #save data
+            pdData.to_pickle(self.API_DATA_NAME)
+        else:
+            pdData = pd.read_pickle(self.API_DATA_NAME)
+
+        #Merge claims huge data set w/ the patent_id's from API
+        if not os.path.isfile(self.CLAIM_OUTFILE_NAME):
+            claims_df = get_BigData(pdData,self.CLAIM_FILE)
+            claims_df=claims_df.sort_values(by=["patent_id"])
+            claims_df.to_pickle(self.CLAIM_OUTFILE_NAME)
+        else:
+            claims_df = pd.read_pickle(self.CLAIM_OUTFILE_NAME)
+
+        self.CLAIMS_DF = claims_df
+        self.pdData = pdData
+
+
+
+
+
 
