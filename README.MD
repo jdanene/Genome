@@ -15,7 +15,7 @@
   - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
   - `patent_abstract`: Abstract of the patent. (START HERE)
   - `patent_title`: (Most likely useless)
-- [ ] Clustering: Cluster the BagofWords vectors and other feasture vectors using some clustering algo. 
+- [x] Clustering: Cluster the BagofWords vectors and other feasture vectors using some clustering algo. 
    - Optimal amount of clusters: http://www.sthda.com/english/wiki/print.php?id=239
    - http://brandonrose.org/clustering
    - https://pythonprogramminglanguage.com/kmeans-elbow-method/
