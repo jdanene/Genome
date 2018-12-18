@@ -1,7 +1,7 @@
 ## Being more precise in how I tokenize sentences.
 
 **Case folding**
- - Reduce case of words to lower except upper-case words in middle of section
+ - Reduce case of words to lower except for upper-case words in middle of section. 
      - General Motors
      - FED vs fed
      - SAIL vs sail
