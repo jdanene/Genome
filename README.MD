@@ -9,7 +9,8 @@
      
 **Word Normalization**
  - U.S.A => USA. Need to specify the equivalence classes of words. An implicit equiv class for this example is deleting periods in a term. 
- 
+
+# OLD OUTLINE
 ## Bag-of-Words
 **Get unique words occuring in all text in our corpus and design a vocabulary.**
 
