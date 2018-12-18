@@ -1,32 +1,14 @@
+## Being more precise in how I tokenize sentences.
 
-**To do**
-- [x] create`apiQueryPatentView.py` to query data from [PatentView](http://www.patentsview.org/api/query-language.html#query_string_format)
-  - Template for API Query: https://www.dataquest.io/blog/python-api-tutorial/
-  - Template for JSON: https://www.dataquest.io/blog/python-json-tutorial/
-- [x] Bag-of-Words and Regex
-  - Regex Resources
-    - [Regex Cheat Sheet](https://scotch.io/tutorials/an-introduction-to-regex-in-python)
-    - [Regex Cheat Sheet](https://stackabuse.com/introduction-to-regular-expressions-in-python/)
-  - [Bag of Words](http://www.insightsbot.com/blog/R8fu5/bag-of-words-algorithm-in-python-introduction)
-    - http://resources.mpi-inf.mpg.de/d5/teaching/ws11_12/irdm/slides/irdm-3-2.pdf
-- [x] Do a comprehensive query on gene editing companies & set up a function to run `BagofWords` on this query. 
-  - [brf_sum_text](http://www.patentsview.org/download/)
-  - [claim](http://www.patentsview.org/download/) 
-  - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
-  - `patent_abstract`: Abstract of the patent. (START HERE)
-  - `patent_title`: (Most likely useless)
-- [x] Clustering: Cluster the BagofWords vectors and other feasture vectors using some clustering algo. 
-   - Optimal amount of clusters: http://www.sthda.com/english/wiki/print.php?id=239
-   - http://brandonrose.org/clustering
-   - https://pythonprogramminglanguage.com/kmeans-elbow-method/
-   - Use PCA and K-Means for now but later look into more [complex matrix factorization techniques](https://scikit-learn.org/stable/auto_examples/applications/plot_topics_extraction_with_nmf_lda.html) 
-- [ ] Fuzzy match the parameter `assignee_organization` with a stock data set. Merge on fuzzymatch and date
-  - Question? When are patents applications usually released? May need to add 1 day to patent data before match to reflect the information being observed by market
-  - [How to map cusip to ticker](https://formthirteen.com/blog/how-to-map-cusip-to-ticker). 
-  - Or just use crosswalk on CUSIP's from [NBER Cusip to PatentView Map](http://www.nber.org/patents/match.txt)
-- [ ] Implement more general ML algos
-
-        
+**Case folding**
+ - Reduce case of words to lower except upper-case words in middle of section
+     - General Motors
+     - FED vs fed
+     - SAIL vs sail
+     
+**Word Normalization**
+ - U.S.A => USA. Need to specify the equivalence classes of words. An implicit equiv class for this example is deleting periods in a term. 
+ 
 ## Bag-of-Words
 **Get unique words occuring in all text in our corpus and design a vocabulary.**
 
@@ -58,6 +40,35 @@ Generalize to bag-of-bigrams model.
     - https://medium.com/@aakashtandel/the-basics-of-natural-language-programming-a-big-bag-of-words-2f2ac06638ea
 ** Patent Background **
 - http://www.bpmlegal.com/howtopat5.html
+
+**To do**
+- [x] create`apiQueryPatentView.py` to query data from [PatentView](http://www.patentsview.org/api/query-language.html#query_string_format)
+  - Template for API Query: https://www.dataquest.io/blog/python-api-tutorial/
+  - Template for JSON: https://www.dataquest.io/blog/python-json-tutorial/
+- [x] Bag-of-Words and Regex
+  - Regex Resources
+    - [Regex Cheat Sheet](https://scotch.io/tutorials/an-introduction-to-regex-in-python)
+    - [Regex Cheat Sheet](https://stackabuse.com/introduction-to-regular-expressions-in-python/)
+  - [Bag of Words](http://www.insightsbot.com/blog/R8fu5/bag-of-words-algorithm-in-python-introduction)
+    - http://resources.mpi-inf.mpg.de/d5/teaching/ws11_12/irdm/slides/irdm-3-2.pdf
+- [x] Do a comprehensive query on gene editing companies & set up a function to run `BagofWords` on this query. 
+  - [brf_sum_text](http://www.patentsview.org/download/)
+  - [claim](http://www.patentsview.org/download/) 
+  - `govint_raw_statement`: The full government interest statement as reported on a given patent. 
+  - `patent_abstract`: Abstract of the patent. (START HERE)
+  - `patent_title`: (Most likely useless)
+- [x] Clustering: Cluster the BagofWords vectors and other feasture vectors using some clustering algo. 
+   - Optimal amount of clusters: http://www.sthda.com/english/wiki/print.php?id=239
+   - http://brandonrose.org/clustering
+   - https://pythonprogramminglanguage.com/kmeans-elbow-method/
+   - Use PCA and K-Means for now but later look into more [complex matrix factorization techniques](https://scikit-learn.org/stable/auto_examples/applications/plot_topics_extraction_with_nmf_lda.html) 
+- [ ] Fuzzy match the parameter `assignee_organization` with a stock data set. Merge on fuzzymatch and date
+  - Question? When are patents applications usually released? May need to add 1 day to patent data before match to reflect the information being observed by market
+  - [How to map cusip to ticker](https://formthirteen.com/blog/how-to-map-cusip-to-ticker). 
+  - Or just use crosswalk on CUSIP's from [NBER Cusip to PatentView Map](http://www.nber.org/patents/match.txt)
+- [ ] Implement more general ML algos
+
+
 ## Break throughs before Gene Therapy
 - Stem cell therapy (1970s)
 - Immunotherapy (1970s)
