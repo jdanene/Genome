@@ -6,8 +6,10 @@
      - FED vs fed
      - SAIL vs sail
          - Group sequences of consecutive upper case letter in same sentence categorize into one word; General Motors.   
+         
 **Word Normalization**
  - U.S.A => USA. Need to specify the equivalence classes of words. An implicit equiv class for this example is deleting periods in a term. 
+
 
 # OLD OUTLINE
 
